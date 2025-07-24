@@ -41,65 +41,23 @@ clear_screen() {
     clear
 }
 
-show_loading_bar() {
-    echo -e "${WHITE}Installing Termux Script...${NC}"
-    echo
+main_installation() {
 
-    local width=20
-    local progress=0
+    rm -rf install
+    apt update -y
+    apt install -y dnsutils
+    apt install -y wget
+    apt install -y nano
+
     local ARCH="$(get_arch)"
     local URL_BASE="https://github.com/hahacrunchyrollls/TERMUX-SCRIPT/raw/refs/heads/main"
     local SCRIPT_NAME="termux-script-version-$VER"
-
-    # If you have arch-specific binaries, append -$ARCH
-    # Uncomment the following line if needed:
-    # SCRIPT_NAME="termux-script-version-$VER-$ARCH"
-
-    while [ $progress -lt 100 ]; do
-        case $progress in
-            0) run_silently "rm -rf install"; progress=10 ;;
-            10) run_silently "apt update -y"; progress=20 ;;
-            20) run_silently "apt install -y wget"; progress=30 ;;
-            30) run_silently "apt install -y dnsutils"; progress=40 ;;
-            40) run_silently "apt install -y nano"; progress=50 ;;
-            50) run_silently "wget $URL_BASE/$SCRIPT_NAME"; progress=70 ;;
-            70) run_silently "chmod +x $SCRIPT_NAME"; progress=80 ;;
-            80) run_silently "mv $SCRIPT_NAME /data/data/com.termux/files/usr/bin/menu"; progress=100 ;;
-        esac
-
-        filled=$((progress * width / 100))
-        bar="["
-        for ((i=0; i<filled; i++)); do bar+="■"; done
-        for ((i=filled; i<width; i++)); do bar+=" "; done
-        bar+="]"
-
-        printf "\r%s %3d%%" "$bar" "$progress"
-        sleep 0.2
-    done
-    printf "\n"
-}
-
-run_silently() {
-    eval "$1" >/dev/null 2>&1 || return 1
-}
-
-show_header() {
-    clear_screen
-    echo -e "${WHITE}╔══════════════════════════╗${NC}"
-    echo -e "${WHITE}  PHC_Jerico Termux Script ${NC}"
-    echo -e "${WHITE}       Version: $VER        ${NC}"
-    echo -e "${WHITE}╚══════════════════════════╝${NC}"
-    echo
-}
-
-main_installation() {
-    show_header
-    show_loading_bar
+    wget "$URL_BASE/$SCRIPT_NAME"
+    chmod +x "$SCRIPT_NAME"
+    mv "$SCRIPT_NAME" /data/data/com.termux/files/usr/bin/tamj
 
     echo
-    echo -e "${WHITE}╔══════════════════════════╗${NC}"
     echo -e "${WHITE}   INSTALLATION COMPLETE   ${NC}"
-    echo -e "${WHITE}╚══════════════════════════╝${NC}"
     echo
     echo -e "${CYAN}TERMUX SCRIPT${NC}"
     echo -e "${BLUE}https://phcorner.net/members/phc_jerico.1922181${NC}"
@@ -120,4 +78,4 @@ trap 'handle_error' ERR
 
 main_installation
 
-echo -e "${GREEN}Ready! Type 'menu' to start${NC}"
+echo -e "${GREEN}Ready! Type 'tamj' to start${NC}"
