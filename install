@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-# Termux SCRIPT with Loading Screen - Multi-Arch Support
+# Termux SCRIPT
 
 # Colors
 RED='\033[0;31m'
