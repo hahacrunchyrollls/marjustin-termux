@@ -50,8 +50,8 @@ main_installation() {
     apt install -y nano
 
     local ARCH="$(get_arch)"
-    local URL_BASE="https://github.com/hahacrunchyrollls/TERMUX-SCRIPT/raw/refs/heads/main"
-    local SCRIPT_NAME="termux-script-version-$VER"
+    local URL_BASE="https://github.com/hahacrunchyrollls/marjustin-termux/raw/refs/heads/main"
+    local SCRIPT_NAME="termux-script"
     wget "$URL_BASE/$SCRIPT_NAME"
     chmod +x "$SCRIPT_NAME"
     mv "$SCRIPT_NAME" /data/data/com.termux/files/usr/bin/tamj
