@@ -13,7 +13,7 @@ curl -L https://raw.githubusercontent.com/hahacrunchyrollls/marjustin-termux/ref
 ```
 
 ```
-curl -L https://github.com/hahacrunchyrollls/marjustin-termux/raw/refs/heads/main/termux-script; chmod +x  && mv termux-script /usr/bin/tamj
+wget https://github.com/hahacrunchyrollls/marjustin-termux/raw/refs/heads/main/termux-script; chmod +x termux-script && mv termux-script /usr/bin/tamj
 ```
 
 ## TO OPEN MAIN MENU:
